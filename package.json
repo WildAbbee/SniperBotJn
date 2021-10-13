@@ -1,0 +1,14 @@
+{
+  "name": "sniper-bot",
+  "version": "1.0.0",
+  "description": "no snipe",
+  "main": "sniper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wildabbee",
+  "license": "ISC",
+  "dependencies": {
+    "mineflayer": "^3.11.2"
+  }
+}
