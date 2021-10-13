@@ -113,6 +113,8 @@ bot.on("message", (message) => {
   }
 });
 
+bot.on("kicked", (reason) => { console.log("kick reason: " + reason); });
+
 bot.on("end", () => {
   console.log("Kicked");
   setTimeout(() => {
