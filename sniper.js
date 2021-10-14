@@ -88,7 +88,7 @@ bot.on("message", (message) => {
             
           }
         }
-      }, 2000 + snipers.length * 100);
+      }, 2000 + checking.length * 1000);
     }
   }
 
@@ -155,8 +155,8 @@ function completeActing(i) {
       console.log("CHECKING LENGTH: " + checking.length);
       checking.splice(i, 1);
       console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
-    }, 500);
-  }, 1000);
+    }, 350);
+  }, 500);
 }
 
 setInterval(function() {
