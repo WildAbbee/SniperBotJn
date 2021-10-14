@@ -1,8 +1,10 @@
 const mineflayer = require('mineflayer');
 
-var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", 
-"pwoii", "Prann__", "Kaspariuxt", "Salti", "boys_like_boys", "Adnthunder", 
-"Vonts", "fluffon", "AmazingTrish", "Skyneh", "Skynie", "Arfanisagrape", "_zyrofam"];
+var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Prann_", "Kaspariuxt", "Salti", "Adnthunder", 
+"Vonts", "fluffon", "AmazingTrish", "Skyneh", "Skynie", "Arfanisagrape", "_zyrofam", 
+"Therainian", "qosh", "asllan", "_BedwarsNoob", "Torpedogaming_YT", "tipies", 
+"UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
+"Loaded242", "masterysword47", "RIPtyy"];
 var checking = [];
 
 var alreadyCalled = false;
@@ -56,7 +58,7 @@ bot.on("message", (message) => {
       }
 
       // queue a check
-      checking.push({ign: name, server: "undefined", found: false});
+      checking.push({ign: name, server: "undefined", found: false, snipers: []});
       bot.chat("/find " + name);
       setTimeout(() => {
         for (var i = 0; i < snipers.length; i++) { 
@@ -105,9 +107,10 @@ bot.on("message", (message) => {
       console.log("found: " + checking[i].found);
       console.log("checkingServer: " + checking[i].server);
       console.log("server: " + server);
-      if (!checking[i].found && checking[i].server !== "undefined" && checking[i].server === server) {
+      if (checking[i].server !== "undefined" && checking[i].server === server) {
         // sniper in their server
         checking[i].found = true;
+        checking[i].snipers.push(name);
       }
     }
   }
@@ -132,8 +135,11 @@ function completeActing(i) {
   setTimeout(() => {
     if (checking[i].found) {
       bot.chat("/p chat WARNING: Sniper detected in your server.");
+      checking[i].snipers.forEach(e => bot.chat("/p chat SNIPER FOUND: " + e));
+      bot.chat("/p chat (sub to wildabbee)")
     } else {
       bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794");
+      bot.chat("/p chat (sub to wildabbee)")
     }
 
     setTimeout(() => {
