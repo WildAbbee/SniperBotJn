@@ -43,6 +43,8 @@ bot.on("message", (message) => {
       const joinParty = message.clickEvent.value;
       const name = joinParty.split(" ")[2];
 
+      if (snipers.includes(name)) return; // don't join if invited by sniper
+
       // check if user has already requested a check
       for (var i = 0; i < checking.length; i++) {
         if (checking[i].ign === name) {
