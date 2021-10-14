@@ -9,6 +9,10 @@ var checking = [];
 
 var alreadyCalled = false;
 
+var uses = 0;
+var runningFor = 0;
+var snipersFound = 0;
+
 var bot = mineflayer.createBot({
   host: "jartex.fun",
   port: 25565,
@@ -135,14 +139,16 @@ bot.on("end", () => {
 }
 function completeActing(i) {
   setTimeout(() => {
+  	uses += 1;
     if (checking[i].found) {
-      bot.chat("/p chat WARNING: Sniper detected in your server.");
-      checking[i].snipers.forEach(e => bot.chat("/p chat SNIPER FOUND: " + e));
-      bot.chat("/p chat (sub to wildabbee)")
+    	snipersFound += 1;
+      	bot.chat("/p chat WARNING: Sniper detected in your server.");
+      	checking[i].snipers.forEach(e => bot.chat("/p chat SNIPER FOUND: " + e));
     } else {
-      bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794");
-      bot.chat("/p chat (sub to wildabbee)")
+		bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794");
     }
+	
+	bot.chat("/p chat AntiSnipe by WildAbbee");
 
     setTimeout(() => {
       bot.chat("/p leave");
@@ -152,6 +158,11 @@ function completeActing(i) {
     }, 500);
   }, 1000);
 }
+
+setInterval(function() {
+	runningFor += 1;
+	console.log("Minutes Running: " + runningFor + ", Uses: " + uses + ", Snipers Found: " + snipersFound);
+}, 1000 * 60);
 
 /*
 Party ▏ Diamond WildAbbee invited you to join his/her party!
