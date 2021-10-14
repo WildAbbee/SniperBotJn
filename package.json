@@ -9,6 +9,7 @@
   "author": "wildabbee",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "mineflayer": "^3.11.2"
   }
 }

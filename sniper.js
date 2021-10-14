@@ -1,10 +1,11 @@
 const mineflayer = require('mineflayer');
+const fs = require('fs');
 
 var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Prann_", "Kaspariuxt", "Salti", "Adnthunder", 
 "Vonts", "fluffon", "AmazingTrish", "Skyneh", "Skynie", "Arfanisagrape", "_zyrofam", 
 "Therainian", "qosh", "asllan", "_BedwarsNoob", "Torpedogaming_YT", "tipies", 
 "UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
-"Loaded242", "masterysword47", "RIPtyy"];
+"Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped"];
 var checking = [];
 
 var alreadyCalled = false;
@@ -12,6 +13,19 @@ var alreadyCalled = false;
 var uses = 0;
 var runningFor = 0;
 var snipersFound = 0;
+
+fs.readFile('data.txt', 'utf8' , (err, data) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  console.log(data)
+
+  lines = data.split("\n");
+  runningFor = parseInt(lines[0].replace("Minutes Running: ", ""));
+  uses = parseInt(lines[1].replace("Uses: ", ""));
+  snipersFound = parseInt(lines[2].replace("Snipers Found: ", ""));
+})
 
 var bot = mineflayer.createBot({
   host: "jartex.fun",
@@ -88,7 +102,7 @@ bot.on("message", (message) => {
             
           }
         }
-      }, 2000 + checking.length * 1000);
+      }, 2500);
     }
   }
 
@@ -162,6 +176,11 @@ function completeActing(i) {
 setInterval(function() {
 	runningFor += 1;
 	console.log("Minutes Running: " + runningFor + ", Uses: " + uses + ", Snipers Found: " + snipersFound);
+	fs.writeFile("data.txt", "Minutes Running: " + runningFor + "\nUses: " + uses + "\nSnipers Found: " + snipersFound, function(err) {
+    	if(err) {
+    	    return console.log(err);
+    	}
+	}); 
 }, 1000 * 60);
 
 /*
