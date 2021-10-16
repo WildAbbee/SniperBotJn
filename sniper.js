@@ -14,6 +14,8 @@ var uses = 0;
 var runningFor = 0;
 var snipersFound = 0;
 
+var users = "";
+
 fs.readFile('data.txt', 'utf8' , (err, data) => {
   if (err) {
     console.error(err)
@@ -25,7 +27,16 @@ fs.readFile('data.txt', 'utf8' , (err, data) => {
   runningFor = parseInt(lines[0].replace("Minutes Running: ", ""));
   uses = parseInt(lines[1].replace("Uses: ", ""));
   snipersFound = parseInt(lines[2].replace("Snipers Found: ", ""));
-})
+});
+
+fs.readFile('data.txt', 'utf8' , (err, data) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  users = data;
+  console.log("Used by " + ((users.match(/is/g) || []).length - 1) + " users.");
+});
 
 var bot = mineflayer.createBot({
   host: "jartex.fun",
@@ -98,6 +109,7 @@ bot.on("message", (message) => {
           if (checking[i].ign === name) {
 
             bot.chat("/p join " + name);
+            if (!users.split("\n").includes(name)) users += name + "\n";
             completeActing(i);
             
           }
@@ -164,7 +176,11 @@ function completeActing(i) {
 		bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794");
     }
 	
-	bot.chat("/p chat AntiSnipe by WildAbbee");
+	bot.chat("/p chat AntiSnipe v1.01 by WildAbbee#6794");
+	if (name === "WildAbbee") bot.chat("/p chat oh hello, WildAbbee, the best bed war player");
+	if (name === "shadowking_101") bot.chat("/p chat ugh shadowking_101 messed up my w/l");
+	if (name === "FrontTrx") bot.chat("/p chat hey FrontTrx do you remember when i 10 potted you in nodebuff")
+	if (name === "Nirahz") bot.chat("/p chat ewww Nirahz u smell")
 
     setTimeout(() => {
       bot.chat("/p leave");
@@ -178,11 +194,19 @@ function completeActing(i) {
 setInterval(function() {
 	runningFor += 1;
 	console.log("Minutes Running: " + runningFor + ", Uses: " + uses + ", Snipers Found: " + snipersFound);
+	console.log("Used by " + ((users.match(/is/g) || []).length - 1) + " users.");
+
 	fs.writeFile("data.txt", "Minutes Running: " + runningFor + "\nUses: " + uses + "\nSnipers Found: " + snipersFound, function(err) {
     	if(err) {
     	    return console.log(err);
     	}
 	}); 
+
+	fs.writeFile("users.txt", users, function(err) {
+		if (err) {
+			return console.log(err);
+		}
+	})
 }, 1000 * 60);
 
 /*
