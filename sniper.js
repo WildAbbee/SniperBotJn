@@ -140,7 +140,7 @@ bot.on("kicked", (reason) => { console.log("kick reason: " + reason); });
 
 bot.on("end", () => {
   console.log("Kicked");
-  check = [];
+  checking = [];
   alreadyCalled = false;
   setTimeout(() => {
   bot = mineflayer.createBot({
