@@ -5,7 +5,7 @@ var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Prann_", "Kaspa
 "Vonts", "fluffon", "AmazingTrish", "Skyneh", "Skynie", "Arfanisagrape", "_zyrofam", 
 "Therainian", "qosh", "asllan", "_BedwarsNoob", "Torpedogaming_YT", "tipies", 
 "UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
-"Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped"];
+"Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped", "axsol", "cornishj10"];
 var checking = [];
 
 var alreadyCalled = false;
@@ -140,6 +140,8 @@ bot.on("kicked", (reason) => { console.log("kick reason: " + reason); });
 
 bot.on("end", () => {
   console.log("Kicked");
+  check = [];
+  alreadyCalled = false;
   setTimeout(() => {
   bot = mineflayer.createBot({
     host: "jartex.fun",
@@ -169,8 +171,8 @@ function completeActing(i) {
       console.log("CHECKING LENGTH: " + checking.length);
       checking.splice(i, 1);
       console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
-    }, 350);
-  }, 500);
+    }, 600);
+  }, 600);
 }
 
 setInterval(function() {
