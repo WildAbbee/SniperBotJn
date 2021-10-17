@@ -29,7 +29,7 @@ fs.readFile('data.txt', 'utf8' , (err, data) => {
   snipersFound = parseInt(lines[2].replace("Snipers Found: ", ""));
 });
 
-fs.readFile('data.txt', 'utf8' , (err, data) => {
+fs.readFile('users.txt', 'utf8' , (err, data) => {
   if (err) {
     console.error(err)
     return
