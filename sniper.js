@@ -187,7 +187,7 @@ function completeActing(i) {
       console.log("CHECKING LENGTH: " + checking.length);
       checking.splice(i, 1);
       console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
-    }, 600);
+    }, 800);
   }, 600);
 }
 
