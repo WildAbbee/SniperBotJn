@@ -5,7 +5,8 @@ var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Prann_", "Kaspa
 "Vonts", "fluffon", "AmazingTrish", "Skyneh", "Skynie", "Arfanisagrape", "_zyrofam", 
 "Therainian", "qosh", "asllan", "_BedwarsNoob", "Torpedogaming_YT", "tipies", 
 "UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
-"Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped", "axsol", "cornishj10"];
+"Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped", "axsol", "cornishj10", 
+"69xAlpysc", "69xRyZe"];
 var checking = [];
 
 var alreadyCalled = false;
@@ -177,11 +178,6 @@ function completeActing(i) {
     }
 	
 	bot.chat("/p chat AntiSnipe v1.01 by WildAbbee#6794");
-	name = checking[i].ign;
-	if (name === "WildAbbee") bot.chat("/p chat oh hello, WildAbbee, the best bed war player");
-	if (name === "shadowking_101") bot.chat("/p chat ugh shadowking_101 messed up my w/l");
-	if (name === "FrontTrx") bot.chat("/p chat hey FrontTrx do you remember when i 10 potted you in nodebuff")
-	if (name === "Nirahz") bot.chat("/p chat ewww Nirahz u smell")
 
     setTimeout(() => {
       bot.chat("/p leave");
