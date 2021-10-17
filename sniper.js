@@ -177,6 +177,7 @@ function completeActing(i) {
     }
 	
 	bot.chat("/p chat AntiSnipe v1.01 by WildAbbee#6794");
+	name = checking[i].ign;
 	if (name === "WildAbbee") bot.chat("/p chat oh hello, WildAbbee, the best bed war player");
 	if (name === "shadowking_101") bot.chat("/p chat ugh shadowking_101 messed up my w/l");
 	if (name === "FrontTrx") bot.chat("/p chat hey FrontTrx do you remember when i 10 potted you in nodebuff")
@@ -187,8 +188,8 @@ function completeActing(i) {
       console.log("CHECKING LENGTH: " + checking.length);
       checking.splice(i, 1);
       console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
-    }, 800);
-  }, 600);
+    }, 1000);
+  }, 500);
 }
 
 setInterval(function() {
