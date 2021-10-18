@@ -7,6 +7,7 @@ var snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Prann_", "Kaspa
 "UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
 "Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped", "axsol", "cornishj10", 
 "69xAlpysc", "69xRyZe"];
+var cheaters = [];
 var checking = [];
 
 var alreadyCalled = false;
@@ -35,8 +36,9 @@ fs.readFile('users.txt', 'utf8' , (err, data) => {
     console.error(err)
     return
   }
-  users = data;
-  console.log("Used by " + ((users.match(/is/g) || []).length - 1) + " users.");
+  users = data.split(", ");
+  if (data.length === 0) users = [];
+  console.log("Used by " + users.length + " users.");
 });
 
 var bot = mineflayer.createBot({
@@ -73,7 +75,7 @@ bot.on("message", (message) => {
       const joinParty = message.clickEvent.value;
       const name = joinParty.split(" ")[2];
 
-      if (snipers.includes(name)) return; // don't join if invited by sniper
+      if (snipers.includes(name) || cheaters.includes(name)) return; // don't join if invited by sniper
 
       // check if user has already requested a check
       for (var i = 0; i < checking.length; i++) {
@@ -90,14 +92,14 @@ bot.on("message", (message) => {
       }
 
       // queue a check
-      checking.push({ign: name, server: "undefined", found: false, snipers: []});
+      checking.push({ign: name, server: "undefined", found: false, snipers: [], cheaters: []});
       bot.chat("/find " + name);
       setTimeout(() => {
         for (var i = 0; i < snipers.length; i++) { 
-          
             bot.chat("/find " + snipers[i]);
-            console.log("FINDING: " + snipers[i]);
-          
+        }
+        for (var i = 0; i < cheaters.length; i++) {
+        	bot.chat("/find " + cheaters[i]);
         }
       }, 2000);
 
@@ -109,10 +111,16 @@ bot.on("message", (message) => {
         for (var i = 0; i < checking.length; i++) {
           if (checking[i].ign === name) {
 
-            bot.chat("/p join " + name);
-            if (!users.split("\n").includes(name)) users += name + "\n";
-            completeActing(i);
-            
+            if (!checking[i].server.includes("Lobby")) {
+            	bot.chat("/p join " + name);
+            	if (!users.includes(name) && name.length > 1) users.push(name + ", ");
+            	completeActing(i);
+            } else {
+            	// bot in lobby probably
+            	console.log("CHECKING LENGTH: " + checking.length);
+      			checking.splice(i, 1);
+      			console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
+            }
           }
         }
       }, 2500);
@@ -142,8 +150,13 @@ bot.on("message", (message) => {
       console.log("server: " + server);
       if (checking[i].server !== "undefined" && checking[i].server === server) {
         // sniper in their server
-        checking[i].found = true;
-        checking[i].snipers.push(name);
+
+        if (snipers.includes(name)) {
+        	checking[i].found = true;
+        	checking[i].snipers.push(name);
+    	} else {
+    		checking[i].cheaters.push(name);
+    	}
       }
     }
   }
@@ -171,19 +184,28 @@ function completeActing(i) {
   	uses += 1;
     if (checking[i].found) {
     	snipersFound += 1;
-      	bot.chat("/p chat WARNING: Sniper detected in your server.");
+      	bot.chat("/p chat WARNING: Sniper detected in your server. (" + checking[i].server + ")");
       	checking[i].snipers.forEach(e => bot.chat("/p chat SNIPER FOUND: " + e));
+    } else if (checking[i].cheaters.length > 0) {
+    	bot.chat("/p chat WARNING: Possible cheaters detected in your server. (" + checking[i].server + ")");
+    	checking[i].cheaters.forEach(e => bot.chat("/p chat CHEATER FOUND: " + e));
     } else {
-		bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794");
+		bot.chat("/p chat No snipers found! If you get sniped please DM igns to WildAbbee#6794 (" + checking[i].server + ")");
     }
 	
-	bot.chat("/p chat AntiSnipe v1.01 by WildAbbee#6794");
+	bot.chat("/p chat AntiSnipe v1.02 by WildAbbee#6794");
 
     setTimeout(() => {
       bot.chat("/p leave");
       console.log("CHECKING LENGTH: " + checking.length);
       checking.splice(i, 1);
       console.log("CHECKING LENGTH AFTER REMOVE: " + checking.length);
+      setTimeout(() => {
+      	bot.chat("/hub")
+      	setTimeout(() => {
+      		bot.chat("/server bedwars")
+      	}, 500);
+      }, 500);
     }, 1000);
   }, 500);
 }
@@ -191,7 +213,7 @@ function completeActing(i) {
 setInterval(function() {
 	runningFor += 1;
 	console.log("Minutes Running: " + runningFor + ", Uses: " + uses + ", Snipers Found: " + snipersFound);
-	console.log("Used by " + ((users.match(/is/g) || []).length - 1) + " users.");
+	console.log("Used by " + users.length + " users.");
 
 	fs.writeFile("data.txt", "Minutes Running: " + runningFor + "\nUses: " + uses + "\nSnipers Found: " + snipersFound, function(err) {
     	if(err) {
@@ -199,7 +221,11 @@ setInterval(function() {
     	}
 	}); 
 
-	fs.writeFile("users.txt", users, function(err) {
+	let usersString = "";
+	for (var i = 0; i < users.length; i++) {
+		usersString += users[i] + ", ";
+	}
+	fs.writeFile("users.txt", usersString, function(err) {
 		if (err) {
 			return console.log(err);
 		}
