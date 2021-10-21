@@ -1,2 +1,2 @@
-node sniper.js
+node setup.js
 pause
