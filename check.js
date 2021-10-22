@@ -27,7 +27,7 @@ module.exports.check = function(message, bot) {
     for (var i = 0; i < setup.cheaters.length; i++) {
       bot.chat("/find " + setup.cheaters[i]);
     }
-  }, 2000);
+  }, 300);
 
   // act on results of check
   setTimeout(() => {
@@ -56,7 +56,9 @@ module.exports.check = function(message, bot) {
   
             setTimeout(() => {
               bot.chat("/p chat &1");
-              bot.chat("/p chat Report cheaters: /p invite AntiHacks (may take a while to join party, be patient)");
+              bot.chat("/p chat &1");
+              bot.chat("/p chat &1");
+              bot.chat("/p chat Report cheaters: /p invite StopHacks (may take a while to join party, be patient)");
               bot.chat(setup.creditMsg);
             }, 100);
 
@@ -80,5 +82,5 @@ module.exports.check = function(message, bot) {
         }
       }
     }
-  }, 2500);
+  }, 2000);
 }

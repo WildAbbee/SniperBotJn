@@ -67,7 +67,7 @@ module.exports.setup = function() {
 	module.exports.ah_bot = mineflayer.createBot({
   		host: "jartex.fun",
   		port: 25565,
-  		username: "antihacks"
+  		username: "StopHacks"
 	});
 
 	antihacks.bindEvents(module.exports.ah_bot, "nocheat");
