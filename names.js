@@ -3,4 +3,4 @@ module.exports.snipers = ["pablobreadmc", "swkinq", "LimitedElimz", "Poi", "Pran
 "Therainian", "qosh", "asllan", "_BedwarsNoob", "Torpedogaming_YT", "tipies", 
 "UselessHimself", "EduZramos", "nowoah", "_Kxn", "oHqrny", 
 "Loaded242", "masterysword47", "RIPtyy", "JakeyGames2006", "wxped", "axsol", "cornishj10", 
-"69xAlpysc", "69xRyZe", "KINGLS1", "_jvla", "Knowly"];
+"69xAlpysc", "69xRyZe", "KINGLS1", "_jvla"];
