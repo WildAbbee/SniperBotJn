@@ -2,7 +2,7 @@
   "name": "sniper-bot",
   "version": "1.0.0",
   "description": "no snipe",
-  "main": "sniper.js",
+  "main": "setup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1", 
     "start": "node ."
