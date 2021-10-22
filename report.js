@@ -1,6 +1,8 @@
 const names = require("./names.js");
 const setup = require("./setup.js");
 
+// player invites stophacks to their party, this function checks some stuff like if the person inviting the bot is a sniper, 
+// etc, then it basically says "hey complete this report whenever ur not in a party"
 module.exports.report = function(message) {
     // report
     if (message.clickEvent === undefined || message.clickEvent.value === undefined) return;
@@ -24,6 +26,8 @@ module.exports.report = function(message) {
 }
 
 // if user disbands their party before bot has a chance to join that could cause some errors, test?
+
+// once the bot has time (isn't handling another report) it joins the party and sends some help messages
 module.exports.actOnReport = function(bot) {
   setup.lastReportTime = getMillis();
   var report = undefined;
@@ -46,7 +50,7 @@ module.exports.actOnReport = function(bot) {
   }, 200);
 
   setTimeout(() => {
-    bot.chat("/p chat Do not include a reason, report multiple players seperately.");
+    bot.chat("/p chat Do not include a reason, report multiple players separately.");
   }, 400);
 
   setTimeout(() => {
@@ -67,6 +71,8 @@ module.exports.actOnReport = function(bot) {
   }, 15000);
 }
 
+// once a player in that party types ?report <ign> this function is called, and it does some checks to make sure the correct command format is used and then
+// it /find's the player who was reported
 module.exports.receivedReport = function(splitMsg, bot) {
   // Party ▏ AntiSnipe2: ?report WildAbbee
   console.log("DEBUG REPORT");
@@ -81,6 +87,8 @@ module.exports.receivedReport = function(splitMsg, bot) {
   }
 }
 
+// once the /find gives a msg this function is called and it checks if /find said the user is not online, if it does then it says report failed, if it is online, it says report successful
+// and adds the username to the list of cheaters
 module.exports.finallyReport = function(splitMsg, validPlayer, bot) {
     // find result
     const name = splitMsg[2];
