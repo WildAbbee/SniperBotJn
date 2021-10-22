@@ -1,1 +1,1 @@
-process: node setup.js
+worker: node setup.js
