@@ -52,7 +52,7 @@ module.exports.setup = function() {
   			module.exports.users = [];
   		}
   		console.log("Used by " + module.exports.users.length + " users.");
-	});
+	});//
 
 	// create the bot
 	module.exports.bot = mineflayer.createBot({
